@@ -3,7 +3,7 @@ LICENSE = "CLOSED"
 
 FILESEXTRAPATHS:prepend := "${THISDIR}:"
 
-SRC_URI = "file://guiopgyro.tar.gz;md5sum=0d54ea4fe4f1652e26adf6bc90acae37"
+SRC_URI = "file://guiopgyro.tar.gz;md5sum=595de9bd6c26f2bc9a099fe47ba8c549"
 
 S = "${WORKDIR}/guiopgyro"
 
