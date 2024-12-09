@@ -154,15 +154,17 @@ else
 fi
 
 
-META_FSL_BSP_RELEASE="${CWD}/sources/meta-imx/meta-bsp"
+META_FSL_BSP_RELEASE="${CWD}/sources/meta-imx/meta-imx-bsp"
 
 echo "" >> $BUILD_DIR/conf/bblayers.conf
 echo "# i.MX Yocto Project Release layers" >> $BUILD_DIR/conf/bblayers.conf
-hook_in_layer meta-imx/meta-bsp
-hook_in_layer meta-imx/meta-sdk
-hook_in_layer meta-imx/meta-ml
-hook_in_layer meta-imx/meta-v2x
+hook_in_layer meta-imx/meta-imx-bsp
+hook_in_layer meta-imx/meta-imx-sdk
+hook_in_layer meta-imx/meta-imx-ml
+hook_in_layer meta-imx/meta-imx-v2x
 hook_in_layer meta-nxp-demo-experience
+hook_in_layer meta-matter/meta-nxp-matter-baseline
+hook_in_layer meta-matter/meta-nxp-openthread
 
 echo "" >> $BUILD_DIR/conf/bblayers.conf
 echo "BBLAYERS += \"\${BSPDIR}/sources/meta-arm/meta-arm\"" >> $BUILD_DIR/conf/bblayers.conf
