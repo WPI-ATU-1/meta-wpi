@@ -2,6 +2,7 @@ FILESEXTRAPATHS:prepend:opgyro := "${THISDIR}/${PN}/opgyro:"
 
 SRC_URI:append:opgyro = " \
 	file://0001-WPI-OP-Gyro-mickledore-to-scarthgap-Kernel-Patch.patch \
+	file://0002-WPI-OP-Gyro-Force-set-USB-Port0-host-mode-and-remove.patch \
 	file://enable_IMX_TPM.cfg \
 	file://enable_USB_SERIAL_PL2303.cfg \
 	file://enable_DRM_PANEL_ILITEK_ILI9881C.cfg \

@@ -1,0 +1,47 @@
+From 313753f4fc47bfc8fee3fc4c82877291eeab68af Mon Sep 17 00:00:00 2001
+From: WPI Benson <benson.lin@wpi-group.com>
+Date: Wed, 25 Dec 2024 09:45:46 +0800
+Subject: [PATCH 2/2] WPI: OP-Gyro: Force set USB Port0 host mode, and remove
+ usb uevent function.
+
+---
+ arch/arm64/boot/dts/wpi/op-gyro.dts | 5 +++--
+ drivers/extcon/extcon-usb-gpio.c    | 2 +-
+ 2 files changed, 4 insertions(+), 3 deletions(-)
+
+diff --git a/arch/arm64/boot/dts/wpi/op-gyro.dts b/arch/arm64/boot/dts/wpi/op-gyro.dts
+index 10807ea5c279..dccc993d742e 100644
+--- a/arch/arm64/boot/dts/wpi/op-gyro.dts
++++ b/arch/arm64/boot/dts/wpi/op-gyro.dts
+@@ -762,12 +762,13 @@ &tpm5 {
+ */
+ 
+ &usbotg1 {
+-	dr_mode = "otg";
++	//dr_mode = "otg";
++	dr_mode = "host";
+ 	hnp-disable;
+ 	srp-disable;
+ 	adp-disable;
+ 	disable-over-current;
+-	usb-role-switch;
++	//usb-role-switch;
+ 	extcon = <&extcon_usb0>;
+ 	samsung,picophy-pre-emp-curr-control = <3>;
+ 	samsung,picophy-dc-vol-level-adjust = <7>;
+diff --git a/drivers/extcon/extcon-usb-gpio.c b/drivers/extcon/extcon-usb-gpio.c
+index 0edb1976cadb..487959c17d78 100644
+--- a/drivers/extcon/extcon-usb-gpio.c
++++ b/drivers/extcon/extcon-usb-gpio.c
+@@ -99,7 +99,7 @@ static void usb_extcon_detect_cable(struct work_struct *work)
+ 		if (vbus)
+ 			extcon_set_state_sync(info->edev, EXTCON_USB, true);
+ 	}
+-#if 1
++#if 0
+ 	if (id){
+ 		gpiod_set_value_cansleep(info->wpi_usb_en, 1);
+ 		printk("[WPI EXT USB] %s() id=1 set wpi_usb_en hi\n", __func__);
+-- 
+2.25.1
+
