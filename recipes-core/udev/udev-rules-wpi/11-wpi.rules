@@ -1,1 +1,0 @@
-SUBSYSTEM=="extcon", ACTION=="change", RUN+="/etc/udev/scripts/wpi_usb_en.sh"
