@@ -1,0 +1,54 @@
+From e86f0482540aeb74980fcfcb08a0147f42eec211 Mon Sep 17 00:00:00 2001
+From: "wpi.ray" <ray.zhang@wpi-group.com>
+Date: Thu, 6 Feb 2025 15:22:29 +0800
+Subject: [PATCH] WPI: OP-Gyro: Fix USB Port0 Not Work Issue
+
+---
+ drivers/extcon/extcon-usb-gpio.c | 16 ++++++++--------
+ 1 file changed, 8 insertions(+), 8 deletions(-)
+
+diff --git a/drivers/extcon/extcon-usb-gpio.c b/drivers/extcon/extcon-usb-gpio.c
+index 487959c17d78..8d25a8fbcc33 100644
+--- a/drivers/extcon/extcon-usb-gpio.c
++++ b/drivers/extcon/extcon-usb-gpio.c
+@@ -70,7 +70,7 @@ static void usb_extcon_detect_cable(struct work_struct *work)
+ 	struct usb_extcon_info *info = container_of(to_delayed_work(work),
+ 						    struct usb_extcon_info,
+ 						    wq_detcable);
+-#if 1
++#if 0
+ 	char *envp[2];
+ #endif
+ 
+@@ -99,21 +99,21 @@ static void usb_extcon_detect_cable(struct work_struct *work)
+ 		if (vbus)
+ 			extcon_set_state_sync(info->edev, EXTCON_USB, true);
+ 	}
+-#if 0
++#if 1
+ 	if (id){
+ 		gpiod_set_value_cansleep(info->wpi_usb_en, 1);
+ 		printk("[WPI EXT USB] %s() id=1 set wpi_usb_en hi\n", __func__);
+-		envp[0]= "RUN=wpi_usb_en_1";
+-		envp[1]= NULL;
++		//envp[0]= "RUN=wpi_usb_en_1";
++		//envp[1]= NULL;
+ 	}else{
+ 		gpiod_set_value_cansleep(info->wpi_usb_en, 0);
+ 		printk("[WPI EXT USB] %s() id=1 set wpi_usb_en low\n", __func__);
+-		envp[0]= "RUN=wpi_usb_en_0";
+-		envp[1]= NULL;
++		//envp[0]= "RUN=wpi_usb_en_0";
++		//envp[1]= NULL;
+ 	}
+ 
+-	printk("[WPI EXT USB] %s() send uevent.\n", __func__);
+-	kobject_uevent_env(&info->dev->kobj, KOBJ_CHANGE, envp);
++	//printk("[WPI EXT USB] %s() send uevent.\n", __func__);
++	//kobject_uevent_env(&info->dev->kobj, KOBJ_CHANGE, envp);
+ #endif
+ }
+ 
+-- 
+2.25.1
+
